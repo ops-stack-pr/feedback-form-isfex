@@ -2,23 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBK Feedback Form</title>
+    <title>GBK Community Hub Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex items-center justify-center p-4">
-
-    <!-- Security Gate -->
-    <div id="securityGate" class="max-w-md w-full bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
-        <h2 class="text-2xl font-bold mb-2">Community Hub Access</h2>
-        <p class="text-sm text-gray-500 mb-6">Masukkan PIN keamanan untuk mengakses form data collection.</p>
-        <input type="password" id="pinInput" placeholder="Masukkan PIN" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none mb-4 text-center tracking-widest">
-        <button onclick="checkPin()" class="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-gray-800 transition">Unlock Form</button>
-        <p id="pinError" class="text-red-500 text-sm mt-3 hidden">PIN tidak valid.</p>
-    </div>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex items-center justify-center p-4 py-10">
 
     <!-- Main Dashboard Form -->
-    <div id="mainFormContainer" class="max-w-2xl w-full bg-white rounded-xl shadow-sm border border-gray-100 p-8 hidden">
-        <h2 class="text-2xl font-bold mb-6 border-b pb-4">Formulir Survei GBK</h2>
+    <div id="mainFormContainer" class="max-w-2xl w-full bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        <h2 class="text-2xl font-bold mb-6 border-b pb-4">#GBKUntukSemua Community Hub</h2>
         
         <form id="gbkForm" class="space-y-5">
             <!-- Nama -->
@@ -65,20 +56,38 @@
                 <label class="block text-sm font-medium mb-1">Venue Favorit</label>
                 <select id="venue" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
                     <option value="" disabled selected>Pilih Venue...</option>
-                    <option value="Stadion Utama Gelora Bung Karno">Stadion Utama (SUGBK)</option>
-                    <option value="Stadion Madya">Stadion Madya</option>
-                    <option value="Hutan Kota GBK">Hutan Kota GBK</option>
+                    <option value="Stadion Utama GBK">Stadion Utama GBK</option>
+                    <option value="Stadion Madya GBK">Stadion Madya GBK</option>
+                    <option value="Stadion Akuatik GBK">Stadion Akuatik GBK</option>
                     <option value="Istora Senayan">Istora Senayan</option>
-                    <option value="Tennis Indoor Senayan">Tennis Indoor Senayan</option>
+                    <option value="Indonesia Arena">Indonesia Arena</option>
+                    <option value="Tenis Indoor">Tenis Indoor</option>
                     <option value="GBK Arena">GBK Arena</option>
                     <option value="Basket Hall">Basket Hall</option>
-                     <option value="Indonesia Arena">Indonesia Arena</option>
+                    <option value="Lap. Tenis Outdoor (Center Court)">Lap. Tenis Outdoor (Center Court)</option>
+                    <option value="Aneka Lapangan A, B, C">Aneka Lapangan A, B, C</option>
+                    <option value="Lap. Panahan">Lap. Panahan</option>
+                    <option value="Lap. Hoki">Lap. Hoki</option>
+                    <option value="Lap. Baseball">Lap. Baseball</option>
+                    <option value="Lap. Softball">Lap. Softball</option>
+                    <option value="Lap. Basket Outdoor">Lap. Basket Outdoor</option>
+                    <option value="Lap. Squash">Lap. Squash</option>
+                    <option value="Jakarta International Convention Center (JICC)">Jakarta International Convention Center (JICC)</option>
+                    <option value="Hutan Kota GBK">Hutan Kota GBK</option>
+                    <option value="Taman Krida Loka">Taman Krida Loka</option>
+                    <option value="Taman Semanggi">Taman Semanggi</option>
+                    <option value="Gedung Serbaguna">Gedung Serbaguna</option>
+                    <option value="Plaza Utara">Plaza Utara</option>
+                    <option value="Plaza Selatan">Plaza Selatan</option>
+                    <option value="Plaza Timur">Plaza Timur</option>
+                    <option value="Plaza Barat">Plaza Barat</option>
+                    <option value="Plaza Tenggara">Plaza Tenggara</option>
                 </select>
             </div>
 
             <!-- Olahraga / Entertainment -->
             <div>
-                <label class="block text-sm font-medium mb-1">Tujuan Utama (Olahraga / Entertainment)</label>
+                <label class="block text-sm font-medium mb-1">Tujuan Utama</label>
                 <select id="tujuan" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
                     <option value="" disabled selected>Pilih...</option>
                     <option value="Olahraga">Olahraga</option>
@@ -120,19 +129,8 @@
     </div>
 
     <script>
-        const SECURITY_PIN = "GBKMANTAP2026";
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxzGds1aTNZQVhoq5txDbw9Mnej5NDsUCNnmp5h_-E6pcYvZxod5vJzc8fGl_b3b1a5Eg/exec";
-
-        // Security Gate Logic
-        function checkPin() {
-            const pin = document.getElementById('pinInput').value;
-            if (pin === SECURITY_PIN) {
-                document.getElementById('securityGate').classList.add('hidden');
-                document.getElementById('mainFormContainer').classList.remove('hidden');
-            } else {
-                document.getElementById('pinError').classList.remove('hidden');
-            }
-        }
+        // Exact Web App URL provided
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxzGds1aTNZQVhoq5txDbw9Mnej5NDsUCNnmp5h_-E6pcYvZxod5vJzc8fGl_b3b1a5Eg/exec"; 
 
         // Conditional Logic for Komunitas
         function toggleKomunitas() {
@@ -164,7 +162,6 @@
             statusMsg.classList.add('hidden');
 
             const payload = {
-                token: SECURITY_PIN, // Passed for backend validation
                 nama: document.getElementById('nama').value,
                 domisili: document.getElementById('domisili').value,
                 pernahKeGbk: document.getElementById('pernahKeGbk').value,
@@ -178,7 +175,6 @@
             };
 
             try {
-                // Sent as text/plain to bypass complex CORS preflight issues on GitHub pages
                 const response = await fetch(WEB_APP_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain' }, 
