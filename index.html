@@ -1,0 +1,209 @@
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBK Community Hub Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex items-center justify-center p-4">
+
+    <!-- Security Gate -->
+    <div id="securityGate" class="max-w-md w-full bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
+        <h2 class="text-2xl font-bold mb-2">Community Hub Access</h2>
+        <p class="text-sm text-gray-500 mb-6">Masukkan PIN keamanan untuk mengakses form data collection.</p>
+        <input type="password" id="pinInput" placeholder="Masukkan PIN" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none mb-4 text-center tracking-widest">
+        <button onclick="checkPin()" class="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-gray-800 transition">Unlock Form</button>
+        <p id="pinError" class="text-red-500 text-sm mt-3 hidden">PIN tidak valid.</p>
+    </div>
+
+    <!-- Main Dashboard Form -->
+    <div id="mainFormContainer" class="max-w-2xl w-full bg-white rounded-xl shadow-sm border border-gray-100 p-8 hidden">
+        <h2 class="text-2xl font-bold mb-6 border-b pb-4">Formulir Survei GBK</h2>
+        
+        <form id="gbkForm" class="space-y-5">
+            <!-- Nama -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Nama</label>
+                <input type="text" id="nama" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <!-- Domisili Area -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Domisili Area</label>
+                <select id="domisili" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                    <option value="" disabled selected>Pilih Domisili...</option>
+                    <option value="DKI Jakarta">DKI Jakarta</option>
+                    <option value="Jabodetabek">Jabodetabek</option>
+                    <option value="Diluar Jabodetabek">Diluar Jabodetabek</option>
+                </select>
+            </div>
+
+            <!-- Pernah ke GBK -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Pernah ke GBK?</label>
+                <select id="pernahKeGbk" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                    <option value="" disabled selected>Pilih...</option>
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                </select>
+            </div>
+
+            <!-- Frekuensi -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Frekuensi ke GBK</label>
+                <select id="frekuensi" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                    <option value="" disabled selected>Pilih Frekuensi...</option>
+                    <option value="< 3 per minggu">< 3 per minggu</option>
+                    <option value="3 - 5 per minggu">3 - 5 per minggu</option>
+                    <option value="> 5 per minggu">> 5 per minggu</option>
+                    <option value="Jarang / Insidental">Jarang / Insidental</option>
+                </select>
+            </div>
+
+            <!-- Venue Favorit -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Venue Favorit</label>
+                <select id="venue" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                    <option value="" disabled selected>Pilih Venue...</option>
+                    <option value="Stadion Utama Gelora Bung Karno">Stadion Utama (SUGBK)</option>
+                    <option value="Stadion Madya">Stadion Madya</option>
+                    <option value="Hutan Kota GBK">Hutan Kota GBK</option>
+                    <option value="Istora Senayan">Istora Senayan</option>
+                    <option value="Tennis Indoor Senayan">Tennis Indoor Senayan</option>
+                    <option value="GBK Arena">GBK Arena</option>
+                    <option value="Basket Hall">Basket Hall</option>
+                </select>
+            </div>
+
+            <!-- Olahraga / Entertainment -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Tujuan Utama (Olahraga / Entertainment)</label>
+                <select id="tujuan" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                    <option value="" disabled selected>Pilih...</option>
+                    <option value="Olahraga">Olahraga</option>
+                    <option value="Entertainment">Entertainment (Konser, Festival, dll)</option>
+                </select>
+            </div>
+
+            <!-- Join Komunitas -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Join Komunitas di GBK?</label>
+                <select id="joinKomunitas" required onchange="toggleKomunitas()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white mb-2">
+                    <option value="" disabled selected>Pilih...</option>
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                </select>
+                <input type="text" id="namaKomunitas" placeholder="Sebutkan nama komunitasnya..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none hidden">
+            </div>
+
+            <!-- Fotografer Komersil -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Setuju dengan adanya Fotografer Komersil di area GBK?</label>
+                <select id="fotografer" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                    <option value="" disabled selected>Pilih...</option>
+                    <option value="Ya">Ya, Setuju</option>
+                    <option value="Tidak">Tidak Setuju</option>
+                </select>
+            </div>
+
+            <!-- Feedback -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Feedback (Max 300 Karakter)</label>
+                <textarea id="feedback" maxlength="300" required rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
+                <div class="text-xs text-gray-400 text-right mt-1"><span id="charCount">0</span>/300</div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-gray-800 transition">Submit Data</button>
+            <p id="statusMsg" class="text-center text-sm font-medium mt-3 hidden"></p>
+        </form>
+    </div>
+
+    <script>
+        const SECURITY_PIN = "GBK2026";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxzGds1aTNZQVhoq5txDbw9Mnej5NDsUCNnmp5h_-E6pcYvZxod5vJzc8fGl_b3b1a5Eg/exec";
+
+        // Security Gate Logic
+        function checkPin() {
+            const pin = document.getElementById('pinInput').value;
+            if (pin === SECURITY_PIN) {
+                document.getElementById('securityGate').classList.add('hidden');
+                document.getElementById('mainFormContainer').classList.remove('hidden');
+            } else {
+                document.getElementById('pinError').classList.remove('hidden');
+            }
+        }
+
+        // Conditional Logic for Komunitas
+        function toggleKomunitas() {
+            const select = document.getElementById('joinKomunitas').value;
+            const input = document.getElementById('namaKomunitas');
+            if (select === 'Ya') {
+                input.classList.remove('hidden');
+                input.setAttribute('required', 'true');
+            } else {
+                input.classList.add('hidden');
+                input.removeAttribute('required');
+                input.value = '';
+            }
+        }
+
+        // Character Counter
+        document.getElementById('feedback').addEventListener('input', function() {
+            document.getElementById('charCount').textContent = this.value.length;
+        });
+
+        // Form Submission
+        document.getElementById('gbkForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const statusMsg = document.getElementById('statusMsg');
+            
+            btn.disabled = true;
+            btn.textContent = "Submitting...";
+            statusMsg.classList.add('hidden');
+
+            const payload = {
+                token: SECURITY_PIN, // Passed for backend validation
+                nama: document.getElementById('nama').value,
+                domisili: document.getElementById('domisili').value,
+                pernahKeGbk: document.getElementById('pernahKeGbk').value,
+                frekuensi: document.getElementById('frekuensi').value,
+                venue: document.getElementById('venue').value,
+                tujuan: document.getElementById('tujuan').value,
+                joinKomunitas: document.getElementById('joinKomunitas').value,
+                namaKomunitas: document.getElementById('namaKomunitas').value,
+                fotografer: document.getElementById('fotografer').value,
+                feedback: document.getElementById('feedback').value,
+            };
+
+            try {
+                // Sent as text/plain to bypass complex CORS preflight issues on GitHub pages
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' }, 
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    statusMsg.textContent = "Data berhasil disimpan!";
+                    statusMsg.className = "text-center text-sm font-medium mt-3 text-green-600";
+                    document.getElementById('gbkForm').reset();
+                    document.getElementById('namaKomunitas').classList.add('hidden');
+                    document.getElementById('charCount').textContent = '0';
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                statusMsg.textContent = "Gagal menyimpan data: " + error.message;
+                statusMsg.className = "text-center text-sm font-medium mt-3 text-red-600";
+            } finally {
+                statusMsg.classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = "Submit Data";
+            }
+        });
+    </script>
+</body>
+</html>
